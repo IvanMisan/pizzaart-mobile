@@ -1,0 +1,7 @@
+{
+  "name": "pizzaart",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
