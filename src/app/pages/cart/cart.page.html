@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Кошик</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="selectedPizzas.length > 0; else empty">
+    <ion-item *ngFor="let pizza of selectedPizzas">
+      <ion-label>
+        {{ pizza.name }} × {{ pizza.quantity }}
+      </ion-label>
+      <ion-note slot="end">{{ pizza.price * pizza.quantity }} грн</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label><strong>Разом</strong></ion-label>
+      <ion-note slot="end"><strong>{{ total }} грн</strong></ion-note>
+    </ion-item>
+    <ion-button expand="full" (click)="submitOrder()">
+      Оформити замовлення
+    </ion-button>
+  </ion-list>
+
+  <ng-template #empty>
+    <ion-text color="medium">
+      <p class="ion-padding">Кошик порожній</p>
+    </ion-text>
+  </ng-template>
+</ion-content>
