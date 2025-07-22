@@ -1,20 +1,41 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>PizzaArt</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let pizza of pizzas">
+      <img [src]="pizza.img" />
+      <ion-card-header>
+        <ion-card-title>{{ pizza.name }}</ion-card-title>
+        <ion-card-subtitle>{{ pizza.price }} ₴</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{ pizza.description }}
+        <ion-button expand="block" (click)="addToCart(pizza)">Додати</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>
+
+<!-- Кошик із можливістю видалення окремих піц -->
+<ion-footer *ngIf="cart.length > 0">
+  <ion-toolbar>
+    <ion-title>Кошик: {{ cart.length }} піц — Сума: {{ getTotal() }} ₴</ion-title>
+  </ion-toolbar>
+
+  <ion-list>
+    <ion-item *ngFor="let pizza of cart; let i = index">
+      {{ pizza.name }} — {{ pizza.price }} ₴
+      <ion-button fill="clear" color="danger" slot="end" (click)="removeFromCart(i)">
+        Видалити
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-toolbar>
+    <ion-button expand="block" color="success" (click)="goToCheckout()">Перейти до оплати</ion-button>
+  </ion-toolbar>
+</ion-footer>

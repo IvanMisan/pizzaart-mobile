@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
+import { IonicModule } from '@ionic/angular';
 
+import { HomePage } from './home.page';       // standalone
 import { HomePageRoutingModule } from './home-routing.module';
-
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    HomePage,             // standalone компонент імпортуємо сюди
     HomePageRoutingModule
-  ],
-  declarations: [HomePage]
+  ]
 })
 export class HomePageModule {}
