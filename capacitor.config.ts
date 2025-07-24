@@ -4,14 +4,17 @@ const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
   appName: 'PizzaArt',
   webDir: 'www',
+  server: {
+    cleartext: true
+  },
   cordova: {
     preferences: {
       SplashScreen: 'screen',
-      SplashScreenDelay: '3000', // время отображения (мс)
+      SplashScreenDelay: '3000',
       FadeSplashScreenDuration: '500',
       ShowSplashScreenSpinner: 'false',
       SplashMaintainAspectRatio: 'true',
-      SplashScreenBackgroundColor: '#C32121' // цвет фона, как на splash.png
+      SplashScreenBackgroundColor: '#C32121'
     }
   }
 };
