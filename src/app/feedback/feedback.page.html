@@ -11,6 +11,16 @@
       <ion-textarea [(ngModel)]="feedbackText" name="feedbackText" required></ion-textarea>
     </ion-item>
 
+    <h3 class="ion-padding-top">Оцените заказ:</h3>
+    <div class="stars">
+      <ion-icon
+        *ngFor="let star of stars; let i = index"
+        [name]="i < rating ? 'star' : 'star-outline'"
+        (click)="setRating(i + 1)"
+        class="star"
+      ></ion-icon>
+    </div>
+
     <ion-item lines="none" class="ion-margin-top">
       <ion-button expand="block" (click)="takePhoto()">Прикрепить фото</ion-button>
     </ion-item>
@@ -19,6 +29,8 @@
       <ion-img [src]="photo"></ion-img>
     </div>
 
-    <ion-button type="submit" expand="block" class="ion-margin-top" [disabled]="!feedbackText">Отправить</ion-button>
+    <ion-button type="submit" expand="block" class="ion-margin-top" [disabled]="!feedbackText || rating === 0">
+      Отправить
+    </ion-button>
   </form>
 </ion-content>
