@@ -1,16 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{ 'menuTitle' | translate }}</ion-title>
-    <ion-select
-      slot="end"
-      [value]="currentLang"
-      (ionChange)="switchLang($event.detail.value)"
-      interface="popover"
-    >
-      <ion-select-option value="en">English</ion-select-option>
-      <ion-select-option value="pl">Polski</ion-select-option>
-      <ion-select-option value="ua">Українська</ion-select-option>
-    </ion-select>
+    <ion-buttons slot="end">
+      <ion-button (click)="openLanguagePopover($event)">
+        <img [src]="'assets/flags/' + currentLang + '.png'" alt="flag" class="flag-icon" />
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

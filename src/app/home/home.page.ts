@@ -1,16 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicModule, AlertController } from '@ionic/angular';
+import { IonicModule, AlertController, PopoverController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-
-interface Pizza {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  img: string;
-}
+import { LanguagePopoverComponent } from '../language-popover/language-popover.component';
 
 @Component({
   selector: 'app-home',
@@ -20,17 +13,33 @@ interface Pizza {
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage {
-  pizzas: Pizza[] = [];
-  cart: Pizza[] = [];
+  pizzas: any[] = [];
+  cart: any[] = [];
   currentLang = 'en';
 
-  constructor(private alertController: AlertController, private translate: TranslateService) {
-    // Добавляем доступные языки
+  constructor(
+    private alertController: AlertController,
+    private translate: TranslateService,
+    private popoverCtrl: PopoverController
+  ) {
     this.translate.addLangs(['en', 'pl', 'ua']);
     this.translate.setDefaultLang(this.currentLang);
     this.translate.use(this.currentLang);
-
     this.loadPizzas();
+  }
+
+  async openLanguagePopover(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: LanguagePopoverComponent,
+      event: ev,
+      translucent: true,
+    });
+    popover.onDidDismiss().then((res) => {
+      if (res.data) {
+        this.switchLang(res.data);
+      }
+    });
+    await popover.present();
   }
 
   switchLang(lang: string) {
@@ -59,7 +68,7 @@ export class HomePage {
     });
   }
 
-  addToCart(pizza: Pizza) {
+  addToCart(pizza: any) {
     this.cart.push(pizza);
   }
 
@@ -88,16 +97,8 @@ export class HomePage {
       subHeader: translations['checkout.subtitle'],
       message: `${pizzaList}\n\n${translations['checkout.total']}: ${total} ₴`,
       buttons: [
-        {
-          text: translations['checkout.cancel'],
-          role: 'cancel',
-        },
-        {
-          text: translations['checkout.confirm'],
-          handler: () => {
-            this.cart = [];
-          },
-        },
+        { text: translations['checkout.cancel'], role: 'cancel' },
+        { text: translations['checkout.confirm'], handler: () => { this.cart = []; } },
       ],
     });
 

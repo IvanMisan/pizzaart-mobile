@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { FeedbackPage } from './feedback.page'; // standalone
+import { FeedbackPage } from './feedback.page';
 import { FeedbackPageRoutingModule } from './feedback-routing.module';
 
 @NgModule({
   imports: [
-    FeedbackPage, // standalone импорт
+    FeedbackPage,
     FeedbackPageRoutingModule,
   ],
 })

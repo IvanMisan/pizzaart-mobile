@@ -8,7 +8,6 @@ export class OrderService {
   private orders: Order[] = [];
 
   constructor() {
-    // Якщо хочеш зберігати в localStorage:
     const saved = localStorage.getItem('orders');
     if (saved) {
       this.orders = JSON.parse(saved);

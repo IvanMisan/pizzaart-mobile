@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';  // <-- импорт
+import { RouterModule } from '@angular/router';
 
 interface OrderItem {
   name: string;
@@ -19,7 +19,7 @@ interface Order {
 @Component({
   selector: 'app-order-history',
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule],  // <-- добавь сюда
+  imports: [CommonModule, IonicModule, RouterModule],
   templateUrl: './order-history.page.html',
   styleUrls: ['./order-history.page.scss'],
 })
