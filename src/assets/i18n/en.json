@@ -15,6 +15,9 @@
     "confirm": "Confirm",
     "total": "Total"
   },
+  "orders": {
+    "historyButton": "Order History"
+  },
   "pizzas": [
     {
       "name": "Margarita",
