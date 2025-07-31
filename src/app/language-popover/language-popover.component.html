@@ -1,0 +1,6 @@
+<ion-list>
+  <ion-item button *ngFor="let lang of languages" (click)="selectLang(lang.code)">
+    <img [src]="lang.flag" alt="{{ lang.label }}" class="flag-icon" />
+    {{ lang.label }}
+  </ion-item>
+</ion-list>
