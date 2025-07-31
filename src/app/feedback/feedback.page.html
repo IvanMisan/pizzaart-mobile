@@ -33,4 +33,18 @@
       Отправить
     </ion-button>
   </form>
+  <ion-list *ngIf="feedbackList.length > 0" class="ion-margin-top">
+    <ion-list-header>
+      <ion-label>Ваши отзывы</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let fb of feedbackList">
+      <ion-label>
+        <p><strong>Оценка:</strong> {{ fb.rating }} ⭐</p>
+        <p>{{ fb.text }}</p>
+      </ion-label>
+      <ion-thumbnail slot="end" *ngIf="fb.photo">
+        <ion-img [src]="fb.photo"></ion-img>
+      </ion-thumbnail>
+    </ion-item>
+  </ion-list>
 </ion-content>

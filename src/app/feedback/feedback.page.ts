@@ -4,6 +4,12 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms';
 
+interface Feedback {
+  text: string;
+  rating: number;
+  photo: string | null | undefined;
+}
+
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.page.html',
@@ -16,6 +22,8 @@ export class FeedbackPage {
   photo: string | null | undefined = null;
   rating: number = 0;
   stars = Array(5).fill(0);
+
+  feedbackList: Feedback[] = [];
 
   constructor() {}
 
@@ -39,9 +47,15 @@ export class FeedbackPage {
   }
 
   submitFeedback() {
-    console.log('Отзыв:', this.feedbackText);
-    console.log('Оценка:', this.rating);
-    console.log('Фото:', this.photo);
+    if (!this.feedbackText || this.rating === 0) return;
+
+    const newFeedback: Feedback = {
+      text: this.feedbackText,
+      rating: this.rating,
+      photo: this.photo,
+    };
+
+    this.feedbackList.push(newFeedback);
 
     alert('Спасибо за ваш отзыв!');
 
