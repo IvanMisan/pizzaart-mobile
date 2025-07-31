@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';  // для *ngFor
-import { IonicModule } from '@ionic/angular';  // для ion-list, ion-item
+import { CommonModule } from '@angular/common';  
+import { IonicModule } from '@ionic/angular';  
 import { PopoverController } from '@ionic/angular';
 
 @Component({
@@ -12,7 +12,7 @@ import { PopoverController } from '@ionic/angular';
 })
 export class LanguagePopoverComponent {
   languages = [
-    { code: 'en', label: 'English', flag: 'assets/flags/en.png' },
+   { code: 'en', label: 'English', flag: 'assets/flags/en.png' },
     { code: 'pl', label: 'Polski', flag: 'assets/flags/pl.png' },
     { code: 'ua', label: 'Українська', flag: 'assets/flags/ua.png' },
   ];
