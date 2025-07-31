@@ -1,0 +1,40 @@
+{
+  "menuTitle": "Pizza Menu",
+  "addButton": "Add to Cart",
+  "cart": {
+    "title": "Cart",
+    "remove": "Remove",
+    "total": "Total",
+    "checkout": "Checkout",
+    "empty": "Cart is empty."
+  },
+  "checkout": {
+    "title": "Payment",
+    "subtitle": "Order summary",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "total": "Total"
+  },
+  "pizzas": [
+    {
+      "name": "Margarita",
+      "description": "Classic pizza with tomato sauce, mozzarella, and basil."
+    },
+    {
+      "name": "Pepperoni",
+      "description": "Pizza with spicy pepperoni, cheese, and tomato sauce."
+    },
+    {
+      "name": "Hawaiian",
+      "description": "Pizza with ham, pineapple, and mozzarella cheese."
+    },
+    {
+      "name": "Four Cheese",
+      "description": "Pizza with four kinds of cheese: mozzarella, parmesan, gorgonzola, cheddar."
+    },
+    {
+      "name": "Vegetarian",
+      "description": "Pizza with vegetables: tomatoes, peppers, olives, onions, mushrooms."
+    }
+  ]
+}

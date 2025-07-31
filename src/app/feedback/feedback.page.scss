@@ -1,0 +1,12 @@
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+.star {
+  color: gold;
+  cursor: pointer;
+}

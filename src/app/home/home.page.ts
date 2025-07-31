@@ -1,37 +1,74 @@
 import { Component } from '@angular/core';
-import { IonicModule, AlertController } from '@ionic/angular';
+import { IonicModule, AlertController, PopoverController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface Pizza {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  img: string;
-}
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { LanguagePopoverComponent } from '../language-popover/language-popover.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule, TranslateModule],
   templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss']
+  styleUrls: ['./home.page.scss'],
 })
 export class HomePage {
-  pizzas: Pizza[] = [
-    { id: 1, name: 'Margarita', description: 'Класична піца з томатним соусом, моцарелою та базиліком.', price: 150, img: 'assets/img/margarita.jpg' },
-    { id: 2, name: 'Pepperoni', description: 'Піца з гострою пепероні, сиром та томатним соусом.', price: 180, img: 'assets/img/pepperoni.jpg' },
-    { id: 3, name: 'Hawaiian', description: 'Піца з шинкою, ананасами та сиром моцарела.', price: 170, img: 'assets/img/hawaiian.jpg' },
-    { id: 4, name: 'Four Cheese', description: 'Піца з чотирма видами сиру: моцарела, пармезан, горгонзола, чеддер.', price: 200, img: 'assets/img/fourcheese.jpg' },
-    { id: 5, name: 'Vegetarian', description: 'Піца з овочами: помідори, перець, оливки, цибуля, гриби.', price: 160, img: 'assets/img/vegetarian.jpg' }
-  ];
+  pizzas: any[] = [];
+  cart: any[] = [];
+  currentLang = 'en';
 
-  cart: Pizza[] = [];
+  constructor(
+    private alertController: AlertController,
+    private translate: TranslateService,
+    private popoverCtrl: PopoverController
+  ) {
+    this.translate.addLangs(['en', 'pl', 'ua']);
+    this.translate.setDefaultLang(this.currentLang);
+    this.translate.use(this.currentLang);
+    this.loadPizzas();
+  }
 
-  constructor(private alertController: AlertController) {}
+  async openLanguagePopover(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: LanguagePopoverComponent,
+      event: ev,
+      translucent: true,
+    });
+    popover.onDidDismiss().then((res) => {
+      if (res.data) {
+        this.switchLang(res.data);
+      }
+    });
+    await popover.present();
+  }
 
-  addToCart(pizza: Pizza) {
+  switchLang(lang: string) {
+    this.currentLang = lang;
+    this.translate.use(lang);
+    this.loadPizzas();
+  }
+
+  loadPizzas() {
+    this.translate.get('pizzas').subscribe((translatedPizzas: any[]) => {
+      const imgPaths = [
+        'assets/img/margarita.jpg',
+        'assets/img/pepperoni.jpg',
+        'assets/img/hawaiian.jpg',
+        'assets/img/fourcheese.jpg',
+        'assets/img/vegetarian.jpg',
+      ];
+
+      this.pizzas = translatedPizzas.map((pizza, index) => ({
+        id: index + 1,
+        name: pizza.name,
+        description: pizza.description,
+        img: imgPaths[index],
+        price: [150, 180, 170, 200, 160][index],
+      }));
+    });
+  }
+
+  addToCart(pizza: any) {
     this.cart.push(pizza);
   }
 
@@ -47,22 +84,22 @@ export class HomePage {
     const pizzaList = this.cart.map(p => `${p.name} — ${p.price} ₴`).join('\n');
     const total = this.getTotal();
 
+    const translations = await this.translate.get([
+      'checkout.title',
+      'checkout.subtitle',
+      'checkout.confirm',
+      'checkout.cancel',
+      'checkout.total',
+    ]).toPromise();
+
     const alert = await this.alertController.create({
-      header: 'Оплата',
-      subHeader: `Підсумок замовлення:`,
-      message: `${pizzaList}\n\nВсього: ${total} ₴`,
+      header: translations['checkout.title'],
+      subHeader: translations['checkout.subtitle'],
+      message: `${pizzaList}\n\n${translations['checkout.total']}: ${total} ₴`,
       buttons: [
-        {
-          text: 'Відмінити',
-          role: 'cancel',
-        },
-        {
-          text: 'Підтвердити',
-          handler: () => {
-            this.cart = []; // Очищуємо кошик після оплати
-          }
-        }
-      ]
+        { text: translations['checkout.cancel'], role: 'cancel' },
+        { text: translations['checkout.confirm'], handler: () => { this.cart = []; } },
+      ],
     });
 
     await alert.present();

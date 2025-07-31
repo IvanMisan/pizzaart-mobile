@@ -4,16 +4,19 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./home/home.module').then((m) => m.HomePageModule),
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
   },
   {
     path: 'order-history',
-    loadChildren: () => import('./pages/order-history/order-history.module').then( m => m.OrderHistoryPageModule)
+    loadChildren: () => import('./pages/order-history/order-history.module').then(m => m.OrderHistoryPageModule),
   },
   {
     path: 'cart',
-    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+    loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartPageModule),
+  },
+  {
+    path: 'feedback/:orderId',
+    loadChildren: () => import('./feedback/feedback.module').then(m => m.FeedbackPageModule),
   },
 ];
 

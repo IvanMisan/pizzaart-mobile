@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>PizzaArt</ion-title>
+    <ion-title>{{ 'menuTitle' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openLanguagePopover($event)">
+        <img [src]="'assets/flags/' + currentLang + '.png'" alt="flag" class="flag-icon" />
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,29 +18,32 @@
         <ion-card-subtitle>{{ pizza.price }} ₴</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        {{ pizza.description }}
-        <ion-button expand="block" (click)="addToCart(pizza)">Додати</ion-button>
+        <p>{{ pizza.description }}</p>
+        <ion-button expand="block" (click)="addToCart(pizza)">
+          {{ 'addButton' | translate }}
+        </ion-button>
       </ion-card-content>
     </ion-card>
   </ion-list>
-</ion-content>
 
-<!-- Кошик із можливістю видалення окремих піц -->
-<ion-footer *ngIf="cart.length > 0">
-  <ion-toolbar>
-    <ion-title>Кошик: {{ cart.length }} піц — Сума: {{ getTotal() }} ₴</ion-title>
-  </ion-toolbar>
-
-  <ion-list>
-    <ion-item *ngFor="let pizza of cart; let i = index">
-      {{ pizza.name }} — {{ pizza.price }} ₴
-      <ion-button fill="clear" color="danger" slot="end" (click)="removeFromCart(i)">
-        Видалити
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ 'cart.title' | translate }}: {{ cart.length }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p *ngIf="cart.length === 0">{{ 'cart.empty' | translate }}</p>
+      <ion-list *ngIf="cart.length > 0">
+        <ion-item *ngFor="let item of cart; let i = index">
+          {{ item.name }} — {{ item.price }} ₴
+          <ion-button fill="clear" color="danger" slot="end" (click)="removeFromCart(i)">
+            {{ 'cart.remove' | translate }}
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      <p *ngIf="cart.length > 0">{{ 'cart.total' | translate }}: {{ getTotal() }} ₴</p>
+      <ion-button *ngIf="cart.length > 0" expand="block" (click)="goToCheckout()">
+        {{ 'cart.checkout' | translate }}
       </ion-button>
-    </ion-item>
-  </ion-list>
-
-  <ion-toolbar>
-    <ion-button expand="block" color="success" (click)="goToCheckout()">Перейти до оплати</ion-button>
-  </ion-toolbar>
-</ion-footer>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
