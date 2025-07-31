@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="pl" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="title" datatype="html">
+        <source>Pizza Menu</source>
+        <target>Menu Pizzy</target>
+      </trans-unit>
+      <trans-unit id="add" datatype="html">
+        <source>Add</source>
+        <target>Dodaj</target>
+      </trans-unit>
+      <trans-unit id="pizza_margherita_name" datatype="html">
+        <source>Margherita</source>
+        <target>Margherita</target>
+      </trans-unit>
+      <trans-unit id="pizza_margherita_desc" datatype="html">
+        <source>Classic pizza with tomato sauce, mozzarella, and basil</source>
+        <target>Klasyczna pizza z sosem pomidorowym, mozzarellą i bazylią</target>
+      </trans-unit>
+      <trans-unit id="pizza_pepperoni_name" datatype="html">
+        <source>Pepperoni</source>
+        <target>Pepperoni</target>
+      </trans-unit>
+
+      <trans-unit id="pizza_pepperoni_desc" datatype="html">
+        <source>Spicy pepperoni, tomato sauce, and mozzarella</source>
+        <target>Pikantna pepperoni, sos pomidorowy i mozzarella</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,43 @@
+{
+  "menuTitle": "Menu Pizzy",
+  "addButton": "Dodaj do koszyka",
+  "cart": {
+    "title": "Koszyk",
+    "remove": "Usuń",
+    "total": "Razem",
+    "checkout": "Zapłać",
+    "empty": "Koszyk jest pusty."
+  },
+  "checkout": {
+    "title": "Płatność",
+    "subtitle": "Podsumowanie zamówienia",
+    "cancel": "Anuluj",
+    "confirm": "Potwierdź",
+    "total": "Razem"
+  },
+  "orders": {
+    "historyButton": "Historia zamówień"
+  },
+  "pizzas": [
+    {
+      "name": "Margarita",
+      "description": "Klasyczna pizza z sosem pomidorowym, mozzarellą i bazylią."
+    },
+    {
+      "name": "Pepperoni",
+      "description": "Pizza z ostrą pepperoni, serem i sosem pomidorowym."
+    },
+    {
+      "name": "Hawajska",
+      "description": "Pizza z szynką, ananasem i serem mozzarella."
+    },
+    {
+      "name": "Cztery sery",
+      "description": "Pizza z czterema rodzajami sera: mozzarella, parmezan, gorgonzola, cheddar."
+    },
+    {
+      "name": "Wegetariańska",
+      "description": "Pizza z warzywami: pomidory, papryka, oliwki, cebula, grzyby."
+    }
+  ]
+}
