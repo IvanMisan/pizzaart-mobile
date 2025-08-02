@@ -36,8 +36,9 @@
       "description": "Pizza with four kinds of cheese: mozzarella, parmesan, gorgonzola, cheddar."
     },
     {
-      "name": "Vegetarian",
+      "name": "Vegetarian1",
       "description": "Pizza with vegetables: tomatoes, peppers, olives, onions, mushrooms."
+       
     }
   ]
 }
