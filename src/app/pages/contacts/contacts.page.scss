@@ -1,0 +1,22 @@
+page-contacts {
+  ion-content {
+    --background: #f8f8f8;
+    
+    .contact-card {
+      margin: 16px;
+      border-radius: 12px;
+      
+      ion-icon {
+        color: var(--ion-color-primary);
+        margin-right: 10px;
+      }
+    }
+    
+    .map-container {
+      height: 200px;
+      margin: 16px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+  }
+}

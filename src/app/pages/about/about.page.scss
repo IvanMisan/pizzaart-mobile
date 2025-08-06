@@ -1,0 +1,21 @@
+page-about {
+  ion-content {
+    --background: #ffffff;
+    
+    .about-card {
+      margin: 16px;
+      border-radius: 12px;
+      box-shadow: none;
+      
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    
+    .about-text {
+      line-height: 1.6;
+      padding: 0 16px;
+    }
+  }
+}

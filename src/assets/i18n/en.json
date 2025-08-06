@@ -1,4 +1,14 @@
 {
+   "menu": {
+    "title": "Menu",
+    "home": "Home",
+    "history": "Order History",
+    "reviews": "Reviews",
+    "profile": "Profile",
+    "about": "About Us",
+    "contacts": "Contacts",
+    "delivery": "Delivery"
+  },
   "menuTitle": "Pizza Menu",
   "addButton": "Add to Cart",
   "cart": {
