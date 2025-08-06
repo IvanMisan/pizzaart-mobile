@@ -1,3 +1,39 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<ion-menu side="start" menuId="main-menu" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>{{ 'menu.title' | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item button [routerLink]="['/']" lines="none">
+        <ion-icon name="home-outline" slot="start"></ion-icon>
+        <ion-label>{{ 'menu.home' | translate }}</ion-label>
+      </ion-item>
+      <ion-item button [routerLink]="['/order-history']" lines="none">
+        <ion-icon name="time-outline" slot="start"></ion-icon>
+        <ion-label>{{ 'menu.history' | translate }}</ion-label>
+      </ion-item>
+      <ion-item button [routerLink]="['/reviews']" lines="none">
+        <ion-icon name="star-outline" slot="start"></ion-icon>
+        <ion-label>{{ 'menu.reviews' | translate }}</ion-label>
+      </ion-item>
+      <ion-item button [routerLink]="['/profile']" lines="none">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-label>{{ 'menu.profile' | translate }}</ion-label>
+      </ion-item>
+      <ion-item button [routerLink]="['/about']" lines="none">
+        <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+        <ion-label>{{ 'menu.about' | translate }}</ion-label>
+      </ion-item>
+      <ion-item button [routerLink]="['/contacts']" lines="none">
+        <ion-icon name="call-outline" slot="start"></ion-icon>
+        <ion-label>{{ 'menu.contacts' | translate }}</ion-label>
+      </ion-item>
+      <ion-item button [routerLink]="['/delivery']" lines="none">
+        <ion-icon name="bicycle-outline" slot="start"></ion-icon>
+        <ion-label>{{ 'menu.delivery' | translate }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
