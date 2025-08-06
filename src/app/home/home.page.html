@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>{{ 'menuTitle' | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="openLanguagePopover($event)">
@@ -43,16 +46,6 @@
       <p *ngIf="cart.length > 0">{{ 'cart.total' | translate }}: {{ getTotal() }} ₴</p>
       <ion-button *ngIf="cart.length > 0" expand="block" (click)="goToCheckout()">
         {{ 'cart.checkout' | translate }}
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>{{ 'orders.title' | translate }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-button expand="block" routerLink="/order-history">
-        {{ 'orders.historyButton' | translate }}
       </ion-button>
     </ion-card-content>
   </ion-card>

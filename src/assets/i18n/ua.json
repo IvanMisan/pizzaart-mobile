@@ -15,9 +15,10 @@
     "confirm": "Підтвердити",
     "total": "Всього"
   },
-  "orders": {
-    "historyButton": "Історія замовлень"
-  },
+ "orders": {
+  "historyButton": "Історія замовлень",
+  "noOrders": "Поки немає замовлень."
+},
   "pizzas": [
     {
       "name": "Маргарита",

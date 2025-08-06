@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { RouterModule, Routes } from '@angular/router';
 
 import { OrderHistoryPage } from './order-history.page';
-import { OrderHistoryPageRoutingModule } from './order-history-routing.module';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: OrderHistoryPage,
+  },
+];
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    OrderHistoryPage,              
-    OrderHistoryPageRoutingModule,
+    RouterModule.forChild(routes),
+    OrderHistoryPage,
   ],
 })
-export class OrderHistoryPageModule {}
+export class OrderHistoryModule {}

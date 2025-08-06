@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { OrderItem } from '../models/order.model';
+
+export interface OrderItem {
+  name: string;
+  price: number;
+  quantity: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -7,10 +12,8 @@ import { OrderItem } from '../models/order.model';
 export class CartService {
   private cart: OrderItem[] = [];
 
-  constructor() {}
-
   getItems(): OrderItem[] {
-    return this.cart;
+    return [...this.cart];
   }
 
   addItem(item: OrderItem) {
@@ -18,15 +21,19 @@ export class CartService {
     if (existing) {
       existing.quantity += item.quantity;
     } else {
-      this.cart.push({ ...item });
+      this.cart.push({...item});
     }
   }
 
-  removeItem(item: OrderItem) {
-    this.cart = this.cart.filter(p => p.name !== item.name);
+  removeItem(itemName: string) {
+    this.cart = this.cart.filter(p => p.name !== itemName);
   }
 
   clearCart() {
     this.cart = [];
+  }
+
+  getTotal(): number {
+    return this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   }
 }

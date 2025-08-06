@@ -16,8 +16,9 @@
     "total": "Razem"
   },
   "orders": {
-    "historyButton": "Historia zamówień"
-  },
+  "historyButton": "Historia zamówień",
+  "noOrders": "Brak zamówień."
+},
   "pizzas": [
     {
       "name": "Margarita",

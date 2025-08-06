@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
-import { IonicModule, AlertController, PopoverController } from '@ionic/angular';
+import { Component, inject } from '@angular/core';
+import { IonicModule, AlertController, PopoverController, MenuController, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { LanguagePopoverComponent } from '../language-popover/language-popover.component';
+import { Router } from '@angular/router';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -13,19 +15,61 @@ import { LanguagePopoverComponent } from '../language-popover/language-popover.c
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage {
+  private cartService = inject(CartService);
+  private alertController = inject(AlertController);
+  private translate = inject(TranslateService);
+  private popoverCtrl = inject(PopoverController);
+  private menuCtrl = inject(MenuController);
+  private router = inject(Router);
+  private toastCtrl = inject(ToastController);
+
   pizzas: any[] = [];
-  cart: any[] = [];
   currentLang = 'en';
 
-  constructor(
-    private alertController: AlertController,
-    private translate: TranslateService,
-    private popoverCtrl: PopoverController
-  ) {
+  private imgPaths = [
+    'assets/img/margarita.jpg',
+    'assets/img/pepperoni.jpg',
+    'assets/img/hawaiian.jpg',
+    'assets/img/fourcheese.jpg',
+    'assets/img/vegetarian.jpg',
+  ];
+  private prices = [150, 180, 170, 200, 160];
+
+  constructor() {
+    this.initializeLanguage();
+  }
+
+  private initializeLanguage() {
     this.translate.addLangs(['en', 'pl', 'ua']);
     this.translate.setDefaultLang(this.currentLang);
     this.translate.use(this.currentLang);
     this.loadPizzas();
+
+    this.translate.onLangChange.subscribe(() => {
+      this.currentLang = this.translate.currentLang || 'en';
+      this.loadPizzas();
+    });
+  }
+
+  private loadPizzas() {
+    this.translate.getTranslation(this.currentLang).subscribe({
+      next: (translations: any) => {
+        const pizzas = translations?.pizzas;
+        this.pizzas = Array.isArray(pizzas) 
+          ? pizzas.map((pizza: any, index: number) => ({
+              id: index + 1,
+              name: pizza.name,
+              description: pizza.description,
+              img: this.imgPaths[index] || 'assets/img/default.jpg',
+              price: this.prices[index] || 100,
+            }))
+          : [];
+      },
+      error: (error) => {
+        console.error('Error loading pizzas:', error);
+        this.pizzas = [];
+      }
+    });
   }
 
   async openLanguagePopover(ev: any) {
@@ -34,55 +78,53 @@ export class HomePage {
       event: ev,
       translucent: true,
     });
-    popover.onDidDismiss().then((res) => {
-      if (res.data) {
-        this.switchLang(res.data);
-      }
-    });
+    
+    const { data } = await popover.onDidDismiss();
+    if (data) {
+      this.switchLang(data);
+    }
+    
     await popover.present();
   }
 
-  switchLang(lang: string) {
+  private switchLang(lang: string) {
     this.currentLang = lang;
     this.translate.use(lang);
-    this.loadPizzas();
   }
 
-  loadPizzas() {
-    this.translate.get('pizzas').subscribe((translatedPizzas: any[]) => {
-      const imgPaths = [
-        'assets/img/margarita.jpg',
-        'assets/img/pepperoni.jpg',
-        'assets/img/hawaiian.jpg',
-        'assets/img/fourcheese.jpg',
-        'assets/img/vegetarian.jpg',
-      ];
-
-      this.pizzas = translatedPizzas.map((pizza, index) => ({
-        id: index + 1,
-        name: pizza.name,
-        description: pizza.description,
-        img: imgPaths[index],
-        price: [150, 180, 170, 200, 160][index],
-      }));
+  async addToCart(pizza: any) {
+    this.cartService.addItem({
+      name: pizza.name,
+      price: pizza.price,
+      quantity: 1,
     });
+    
+    const toast = await this.toastCtrl.create({
+      message: `${pizza.name} added to cart`,
+      duration: 1500,
+      position: 'top'
+    });
+    await toast.present();
   }
 
-  addToCart(pizza: any) {
-    this.cart.push(pizza);
+  get cartItems() {
+    return this.cartService.getItems();
   }
 
-  removeFromCart(index: number) {
-    this.cart.splice(index, 1);
-  }
-
-  getTotal(): number {
-    return this.cart.reduce((sum, p) => sum + p.price, 0);
+  get cartTotal() {
+    return this.cartService.getTotal();
   }
 
   async goToCheckout() {
-    const pizzaList = this.cart.map(p => `${p.name} — ${p.price} ₴`).join('\n');
-    const total = this.getTotal();
+    if (this.cartService.getItems().length === 0) {
+      const toast = await this.toastCtrl.create({
+        message: 'Your cart is empty',
+        duration: 1500,
+        position: 'top'
+      });
+      await toast.present();
+      return;
+    }
 
     const translations = await this.translate.get([
       'checkout.title',
@@ -93,15 +135,27 @@ export class HomePage {
     ]).toPromise();
 
     const alert = await this.alertController.create({
-      header: translations['checkout.title'],
-      subHeader: translations['checkout.subtitle'],
-      message: `${pizzaList}\n\n${translations['checkout.total']}: ${total} ₴`,
+      header: translations?.['checkout.title'] || 'Checkout',
+      subHeader: translations?.['checkout.subtitle'] || 'Order summary',
+      message: `${this.cartItems.map(p => `${p.name} × ${p.quantity} — ${p.price * p.quantity} ₴`).join('\n')}
+                \n\n${translations?.['checkout.total'] || 'Total'}: ${this.cartTotal} ₴`,
       buttons: [
-        { text: translations['checkout.cancel'], role: 'cancel' },
-        { text: translations['checkout.confirm'], handler: () => { this.cart = []; } },
+        { 
+          text: translations?.['checkout.cancel'] || 'Cancel', 
+          role: 'cancel' 
+        },
+        { 
+          text: translations?.['checkout.confirm'] || 'Confirm', 
+          handler: () => this.cartService.clearCart()
+        },
       ],
     });
 
     await alert.present();
+  }
+
+  openOrderHistory() {
+    this.menuCtrl.close();
+    this.router.navigate(['/order-history']);
   }
 }

@@ -15,9 +15,6 @@
     "confirm": "Confirm",
     "total": "Total"
   },
-  "orders": {
-    "historyButton": "Order History"
-  },
   "pizzas": [
     {
       "name": "Margarita",
@@ -36,9 +33,8 @@
       "description": "Pizza with four kinds of cheese: mozzarella, parmesan, gorgonzola, cheddar."
     },
     {
-      "name": "Vegetarian1",
+      "name": "Vegetarian",
       "description": "Pizza with vegetables: tomatoes, peppers, olives, onions, mushrooms."
-       
     }
   ]
 }

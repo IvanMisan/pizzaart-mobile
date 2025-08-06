@@ -1,17 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Оставить отзыв</ion-title>
+    <ion-title>Оставити відгук</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <form (ngSubmit)="submitFeedback()">
     <ion-item>
-      <ion-label position="floating">Ваш отзыв</ion-label>
+      <ion-label position="floating">Ваш відгук</ion-label>
       <ion-textarea [(ngModel)]="feedbackText" name="feedbackText" required></ion-textarea>
     </ion-item>
 
-    <h3 class="ion-padding-top">Оцените заказ:</h3>
+    <h3 class="ion-padding-top">Оценіть замовлення:</h3>
     <div class="stars">
       <ion-icon
         *ngFor="let star of stars; let i = index"
@@ -22,7 +22,7 @@
     </div>
 
     <ion-item lines="none" class="ion-margin-top">
-      <ion-button expand="block" (click)="takePhoto()">Прикрепить фото</ion-button>
+      <ion-button expand="block" (click)="takePhoto()">Прекрипіти фото</ion-button>
     </ion-item>
 
     <div *ngIf="photo">
@@ -30,16 +30,16 @@
     </div>
 
     <ion-button type="submit" expand="block" class="ion-margin-top" [disabled]="!feedbackText || rating === 0">
-      Отправить
+      Відправити
     </ion-button>
   </form>
   <ion-list *ngIf="feedbackList.length > 0" class="ion-margin-top">
     <ion-list-header>
-      <ion-label>Ваши отзывы</ion-label>
+      <ion-label>Ваші відгуки</ion-label>
     </ion-list-header>
     <ion-item *ngFor="let fb of feedbackList">
       <ion-label>
-        <p><strong>Оценка:</strong> {{ fb.rating }} ⭐</p>
+        <p><strong>Оцінка:</strong> {{ fb.rating }} ⭐</p>
         <p>{{ fb.text }}</p>
       </ion-label>
       <ion-thumbnail slot="end" *ngIf="fb.photo">

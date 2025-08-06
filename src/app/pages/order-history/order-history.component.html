@@ -1,3 +1,15 @@
-<p>
-  order-history works!
-</p>
+<h2>{{ 'orders.historyButton' | translate }}</h2>
+
+<ul *ngIf="orders.length > 0; else noOrders">
+  <li *ngFor="let order of orders">
+    <button (click)="selectOrder(order)">
+      Заказ #{{order.id}} — {{ getOrderTitle(order) }}
+      <br>
+      <small>{{ order.date | date:'fullDate':undefined:currentLang }}</small>
+    </button>
+  </li>
+</ul>
+
+<ng-template #noOrders>
+  <p>{{ 'orders.noOrders' | translate }}</p>
+</ng-template>
