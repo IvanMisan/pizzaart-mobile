@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+    loadChildren: () => import('src/app/home/home.module').then(m => m.HomePageModule),
   },
   {
     path: 'order-history',
@@ -18,10 +18,20 @@ const routes: Routes = [
     path: 'feedback/:orderId',
     loadChildren: () => import('./feedback/feedback.module').then(m => m.FeedbackPageModule),
   },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+  imports: [
+    RouterModule.forRoot(routes, { 
+      preloadingStrategy: PreloadAllModules,
+      onSameUrlNavigation: 'reload'
+    })
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

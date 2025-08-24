@@ -1,4 +1,14 @@
 {
+   "menu": {
+    "title": "Меню",
+    "home": "Головна",
+    "history": "Історія замовлень",
+    "reviews": "Відгуки",
+    "profile": "Профіль",
+    "about": "Про нас",
+    "contacts": "Контакти",
+    "delivery": "Доставка"
+  },
   "menuTitle": "Меню піц",
   "addButton": "Додати в кошик",
   "cart": {
