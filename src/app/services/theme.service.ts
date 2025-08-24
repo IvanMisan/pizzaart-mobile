@@ -9,7 +9,9 @@ export class ThemeService {
   private darkModeSubject = new BehaviorSubject<boolean>(false);
   darkMode$ = this.darkModeSubject.asObservable();
 
-  constructor(private storage: Storage) {
+  constructor(
+    private storage: Storage,
+  ) {
     this.init();
   }
 

@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
   ModalController,
@@ -46,16 +46,16 @@ import { AnimationController } from '@ionic/angular';
     IonAvatar
   ]
 })
-export class CartModalPage {
-  private modalCtrl = inject(ModalController);
-  private animationCtrl = inject(AnimationController);
-  private translate = inject(TranslateService);
-
+export class CartModal {
   @Input() cartItems: CartItem[] = [];
   @Input() total: number = 0;
   defaultCurrency = '₴';
 
-  constructor() {
+  constructor(
+    private modalCtrl: ModalController,
+    private animationCtrl: AnimationController,
+    private translate: TranslateService
+  ) {
     addIcons({ close, trash, cartOutline, remove, add });
   }
 
@@ -106,7 +106,6 @@ export class CartModalPage {
   }
 
   checkout() {
-    console.log('Proceeding to checkout with:', this.cartItems);
     this.dismiss(true);
   }
 
