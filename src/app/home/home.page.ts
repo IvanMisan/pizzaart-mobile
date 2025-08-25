@@ -1,21 +1,56 @@
 import { Component } from '@angular/core';
-import { IonicModule, AlertController, PopoverController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { 
+  IonHeader, 
+  IonToolbar, 
+  IonTitle, 
+  IonContent, 
+  IonList, 
+  IonCard, 
+  IonCardHeader, 
+  IonCardTitle, 
+  IonCardSubtitle, 
+  IonCardContent, 
+  IonButton, 
+  IonItem, 
+  IonButtons,
+  IonMenuButton,
+  AlertController, 
+  PopoverController 
+} from '@ionic/angular/standalone';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { LanguagePopoverComponent } from '../language-popover/language-popover.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, TranslateModule],
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    TranslateModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonList,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
+    IonButton,
+    IonItem,
+    IonButtons,
+    IonMenuButton
+  ],
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage {
   pizzas: any[] = [];
   cart: any[] = [];
-  currentLang = 'en';
+  currentLang = 'ua';
 
   constructor(
     private alertController: AlertController,

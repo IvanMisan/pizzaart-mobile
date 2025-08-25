@@ -26,12 +26,16 @@ export class ThemeService {
   }
 
   async toggleDarkMode() {
-    this.setDarkMode(!this.darkMode);
-    await this.storage.set('darkMode', this.darkMode);
+    const newMode = !this.darkMode;
+    await this.setDarkMode(newMode);
   }
-
-  private setDarkMode(enabled: boolean) {
+  async setDarkMode(enabled: boolean) {
     this.darkModeSubject.next(enabled);
     document.body.classList.toggle('dark', enabled);
+    await this.storage.set('darkMode', enabled);
+  }
+
+  getCurrentTheme(): string {
+    return this.darkMode ? 'dark' : 'light';
   }
 }
