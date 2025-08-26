@@ -1,4 +1,14 @@
 {
+  "menu": {
+    "title": "Menu",
+    "home": "Strona główna",
+    "history": "Historia zamówień",
+    "reviews": "Recenzje",
+    "profile": "Profil",
+    "about": "O nas",
+    "contacts": "Kontakt",
+    "delivery": "Dostawa"
+  },
   "menuTitle": "Menu Pizzy",
   "addButton": "Dodaj do koszyka",
   "cart": {

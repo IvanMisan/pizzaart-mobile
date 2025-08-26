@@ -1,0 +1,25 @@
+page-delivery {
+  ion-content {
+    --background: #ffffff;
+    
+    .delivery-option {
+      margin-bottom: 16px;
+      border-radius: 8px;
+      --padding-start: 16px;
+      --padding-end: 16px;
+      
+      ion-icon {
+        font-size: 24px;
+        margin-right: 12px;
+        color: var(--ion-color-primary);
+      }
+    }
+    
+    .delivery-info {
+      padding: 16px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      margin: 16px;
+    }
+  }
+}

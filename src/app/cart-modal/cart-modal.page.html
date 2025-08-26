@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ 'cart.title' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="cartItems.length > 0">
+    <ion-item *ngFor="let item of cartItems; let i = index">
+      <ion-avatar slot="start">
+        <img [src]="item.pizza.image" [alt]="item.pizza.nameKey | translate">
+      </ion-avatar>
+      
+      <ion-label>
+        <h2>{{ item.pizza.nameKey | translate }}</h2>
+        <p>{{ item.pizza.price * item.quantity }} {{ item.pizza.currency }}</p>
+      </ion-label>
+
+      <div slot="end" class="quantity-controls">
+        <ion-button fill="clear" size="small" (click)="decreaseQuantity(item)">
+          <ion-icon name="remove"></ion-icon>
+        </ion-button>
+        
+        <ion-note>{{ item.quantity }}</ion-note>
+        
+        <ion-button fill="clear" size="small" (click)="increaseQuantity(item)">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </div>
+
+      <ion-button slot="end" fill="clear" color="danger" (click)="removeItem(i)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <div class="empty-cart" *ngIf="cartItems.length === 0">
+    <ion-icon name="cart-outline"></ion-icon>
+    <p>{{ 'cart.empty' | translate }}</p>
+  </div>
+
+  <div class="checkout-section" *ngIf="cartItems.length > 0">
+    <ion-item lines="none">
+      <ion-label>{{ 'cart.total' | translate }}</ion-label>
+      <ion-note slot="end" color="primary">
+        {{ total }} {{ getCurrency() }}
+      </ion-note>
+    </ion-item>
+    
+    <ion-button expand="block" (click)="checkout()">
+      {{ 'cart.checkout' | translate }}
+    </ion-button>
+  </div>
+</ion-content>
