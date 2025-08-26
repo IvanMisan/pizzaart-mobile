@@ -1,0 +1,40 @@
+:host {
+    .empty-cart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 50vh;
+        text-align: center;
+        
+        ion-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            color: var(--ion-color-medium);
+        }
+        
+        p {
+            color: var(--ion-color-medium);
+            font-size: 16px;
+        }
+    }
+
+    .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        
+        ion-note {
+            min-width: 24px;
+            text-align: center;
+        }
+    }
+
+    .checkout-section {
+        padding: 16px;
+        
+        ion-button {
+            margin-top: 16px;
+        }
+    }
+}

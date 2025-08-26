@@ -1,0 +1,15 @@
+page-reviews {
+  ion-content {
+    --background: #f8f8f8;
+    
+    .review-item {
+      margin-bottom: 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      
+      ion-label {
+        white-space: normal;
+      }
+    }
+  }
+}
